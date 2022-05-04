@@ -1,0 +1,102 @@
+---
+title: "Mapa urbano en R"
+author: "Autora: Sara Acevedo seaceved@uc.cl"
+date: "5/4/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+#### Es útil representar nuestros datos ambientales en el contexto urbano de forma simple y rápida. En este tutorial aprenderemos a plotear un mapa de Santiago de Chile con una capa de puntos + legenda
+
+#### Librerias
+
+```{r results='hide', message=FALSE, warning=FALSE}
+library(tidyverse) # data clean
+library(ggmap) # mapas
+library(sf)  # dataframe a espacial
+library(ggspatial) #mapas
+library(osmdata) #mapa
+```
+
+#### Cargamos el bounding box de la ciudad 
+#### Un bounding box (abreviado bbox) es un área definida por dos longitudes y dos latitudes, donde el estandar es:
+
+- bbox = left,bottom,right,top
+- bbox = Longitud mínima , Latitud mínima , Longitud máxima , Latitud máxima
+
+```{r}
+stgo_bbox <- getbb("Santiago")
+```
+
+#### Creamos el mapa desde Open Stret Map usando ggmap
+```{r, message=FALSE, warning=FALSE}
+map <- get_stamenmap(
+  bbox = c(
+    left = stgo_bbox[1, 1],
+    bottom = stgo_bbox[2, 1],
+    right = stgo_bbox[1, 2],
+    top = stgo_bbox[2, 2]
+  ),
+  zoom = 12,
+  maptype = "terrain"
+)
+
+```
+
+#### Creamos un dataset de ejemplo ficticio, usando tribble 
+```{r}
+lugares_stgo <- tribble(
+  ~ "lng", ~ "lat", ~ "numero_aves",
+  -70.51861,
+  -33.38371,
+  21,
+  -70.71982,
+  -33.51318,
+  33,
+  -70.65768,
+  -33.42345,
+  12,
+  -70.55768,
+  -33.56177,
+  15,
+  -70.67279,
+  -33.50156,
+  52
+)
+```
+
+#### Estos datos ahora son transformados a un objeto sf. Revisar siempre el CRS 	
+#### (coordinate reference system) de las coordenadas del dataframe original
+```{r}
+lugares_stgo_sf <-
+  st_as_sf(lugares_stgo, coords = c("lng", "lat"), crs = 4326)
+```
+#### Ahora, comenzando con ggmap() + geom_sf() graficamos los puntos, incluyendo en aes(color) el número de aves para tener una legenda
+```{r}
+mapa_urbano <- ggmap(map) +
+  geom_sf(
+    data = lugares_stgo_sf,
+    aes(color = numero_aves),
+    size = 3,
+    inherit.aes = FALSE
+  ) +
+  labs(x = "", y = "", color = "número\nde aves") +
+  annotation_scale(location = "br",
+                   bar_cols = c("grey20", "white")) +
+  ggtitle("Santiago de Chile") +
+  annotation_north_arrow(
+    location = "tl",
+    which_north = "true",
+    style = north_arrow_nautical(fill = c("grey40", "white"),
+                                 line_col = "grey20")
+  )
+
+mapa_urbano
+```
+
+#### Ojalá este tutorial sea de utilidad, no olvides seguir a Soil Biophysics Lab en sus redes
+- [Website Soil Biophysics Lab](https://biofisica.ing.puc.cl)
+- [Twitter: @soilbiophysics1](https://twitter.com/soilbiophysics1)
+- [Instagram: @soilbiophysicslab](https://www.instagram.com/soilbiophysicslab)
