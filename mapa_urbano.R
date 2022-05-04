@@ -47,7 +47,6 @@ lugares_stgo <- tribble(
 lugares_stgo_sf <-
   st_as_sf(lugares_stgo, coords = c("lng", "lat"), crs = 4326)
 
-
 # Mapa urbano -------------------------------------------------------------
 
 mapa_urbano <- ggmap(map) +
