@@ -12,4 +12,4 @@
 
 ## Tutorial (ES)
 
-![urban_map](https://saryace.github.io/mapa_urbano/)
+[Tutorial HTML](https://saryace.github.io/mapa_urbano/)
