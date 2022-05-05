@@ -13,3 +13,10 @@
 ## Tutorial (ES)
 
 [Tutorial HTML](https://saryace.github.io/mapa_urbano/)
+
+## No olvides seguir al Laboratorio Biofisica de Suelos PUC en sus redes
+
+1. [Website laboratorio](https://biofisica.ing.puc.cl)
+2. [Twitter](https://twitter.com/soilbiophysics1)
+3. [Instagram](https://www.instagram.com/soilbiophysicslab)
+
