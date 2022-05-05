@@ -8,7 +8,7 @@
 
 ## YT video (EN SUB)
 
-[![yt_video](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
+[![yt_video](https://img.youtube.com/vi/tZenh0f9UCg/0.jpg)](https://www.youtube.com/watch?v=tZenh0f9UCg)
 
 ## Tutorial (ES)
 
